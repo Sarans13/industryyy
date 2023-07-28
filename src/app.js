@@ -2,7 +2,8 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
-const InvestmentSeekersCollection = require("./mongodb");
+const { StartupCollection, InvestorCollection } = require("./mongodb");
+
 
 //use app from express
 app.use(express.json());
@@ -44,32 +45,42 @@ app.get("/signup", (req, res) => {
 //handling post requests for mongodb
 app.post('/signup', async (req, res) => {
     const data = {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        companyname: req.body.companyname,
-        companytype: req.body.companytype,
-        phonenumber: req.body.phonenumber
-    }
-
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      companyname: req.body.companyname,
+      companytype: req.body.companytype,
+      phonenumber: req.body.phonenumber,
+      problemmentioned: req.body.problemmentioned,
+      color: req.body.color
+    };
+  
     try {
-        const checking = await InvestmentSeekersCollection.findOne({ username: req.body.username });
-
-        if (checking) {
-            if (checking.username === req.body.username && checking.password === req.body.password) {
-                res.send("User details already exist");
-            } else {
-                res.send("Username already taken");
-            }
+      let collection;
+      if (req.body.color === 'red') {
+        collection = StartupCollection;
+      } else {
+        collection = InvestorCollection;
+      }
+  
+      const checking = await collection.findOne({ username: req.body.username });
+  
+      if (checking) {
+        if (checking.username === req.body.username && checking.password === req.body.password) {  
+          const count = await collection.countDocuments({});
+          res.status(201).render("index", {});
         } else {
-            await InvestmentSeekersCollection.insertMany([data]);
-            res.status(201).render("index");
+          res.send("Incorrect password");
         }
+      } else {
+        await collection.insertMany([data]);
+        res.status(201).render("index");
+      }
     } catch (error) {
-        console.log(error);
-        res.send("Error occurred while checking the database");
+      console.log(error);
+      res.send("Error occurred while checking the database");
     }
-});
+  });
 
 
 //to test login credentials
@@ -80,9 +91,17 @@ app.post('/login', async (req, res) => {
         year: 'numeric',
     });
     try {
-        const check = await InvestmentSeekersCollection.findOne({ username: req.body.username })
+        let collection;
+        if (req.body.color === 'red') {
+          collection = StartupCollection;
+        } else {
+          collection = InvestorCollection;
+        }
+        console.log(collection);
+        const check = await collection.findOne({ username: req.body.username })
+        console.log(check.username,check.password);
         if (check.password === req.body.password) {
-            const count = await InvestmentSeekersCollection.countDocuments({});
+            const count = await collection.countDocuments({});
             res.status(201).render("dashboard", { user: check, currentDate,count })
         }
         else {
