@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
 const { StartupCollection, InvestorCollection } = require("./mongodb");
+const { companiesData } = require("./data");
 
 
 //use app from express
@@ -67,7 +68,6 @@ app.post('/signup', async (req, res) => {
   
       if (checking) {
         if (checking.username === req.body.username && checking.password === req.body.password) {  
-          const count = await collection.countDocuments({});
           res.status(201).render("index", {});
         } else {
           res.send("Incorrect password");
@@ -97,18 +97,21 @@ app.post('/login', async (req, res) => {
         } else {
           collection = InvestorCollection;
         }
-        console.log(collection);
         const check = await collection.findOne({ username: req.body.username })
         console.log(check.username,check.password);
         if (check.password === req.body.password) {
+            const matchingCompanies = companiesData.filter((company) => company.type === check.companytype);
             const count = await collection.countDocuments({});
-            res.status(201).render("dashboard", { user: check, currentDate,count })
+            if (matchingCompanies.length > 0) {
+                res.status(201).render("dashboard", { user: check, currentDate,count, matchingCompanies });
+              }
         }
         else {
             res.send("incorrect password")
         }
     }
     catch (e) {
+        console.log(e);
         res.send("wrong details")
     }
 })
