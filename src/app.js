@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
-const SignUpCollection = require("./mongodb");
+const InvestmentSeekersCollection = require("./mongodb");
 
 //use app from express
 app.use(express.json());
@@ -49,11 +49,11 @@ app.post('/signup', async (req, res) => {
         email: req.body.email,
         companyname: req.body.companyname,
         companytype: req.body.companytype,
-        phonenumber:req.body.phonenumber
+        phonenumber: req.body.phonenumber
     }
 
     try {
-        const checking = await SignUpCollection.findOne({ username: req.body.username });
+        const checking = await InvestmentSeekersCollection.findOne({ username: req.body.username });
 
         if (checking) {
             if (checking.username === req.body.username && checking.password === req.body.password) {
@@ -62,7 +62,7 @@ app.post('/signup', async (req, res) => {
                 res.send("Username already taken");
             }
         } else {
-            await SignUpCollection.insertMany([data]);
+            await InvestmentSeekersCollection.insertMany([data]);
             res.status(201).render("index");
         }
     } catch (error) {
@@ -74,10 +74,16 @@ app.post('/signup', async (req, res) => {
 
 //to test login credentials
 app.post('/login', async (req, res) => {
+    const currentDate = new Date().toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    });
     try {
-        const check = await SignUpCollection.findOne({ username: req.body.username })
+        const check = await InvestmentSeekersCollection.findOne({ username: req.body.username })
         if (check.password === req.body.password) {
-            res.status(201).render("dashboard", {})
+            const count = await InvestmentSeekersCollection.countDocuments({});
+            res.status(201).render("dashboard", { user: check, currentDate,count })
         }
         else {
             res.send("incorrect password")

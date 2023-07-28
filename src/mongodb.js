@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
 
-mongoose.connect("mongodb+srv://SaransMishra:SaransIsALearner@industrycluster.hqrm8zx.mongodb.net/")
+mongoose.connect("mongodb+srv://SaransMishra:SaransIsALearner@industrycluster.hqrm8zx.mongodb.net/IndusAid")
 .then(()=>{
     console.log('mongoose connected');
 })
@@ -40,6 +40,9 @@ const logInSchema=new mongoose.Schema({
     }
 })
 
-const SignUpCollection=new mongoose.model('Registration',logInSchema)
+// const SignUpCollection=new mongoose.model('Registration',logInSchema)
 
-module.exports=SignUpCollection
+// module.exports=SignUpCollection
+const InvestmentSeekersCollection = new mongoose.model('Investmentseekers', logInSchema);
+
+module.exports = InvestmentSeekersCollection;
