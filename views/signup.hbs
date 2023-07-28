@@ -1,0 +1,130 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login__content">
+
+        <form action="/signup" method="post" class="login__form" id="signup__form">
+          <div>
+            <h1 class="login__title">
+              <span>Welcome</span>
+            </h1>
+            <p class="login__description">
+              | Welcome! Please signup to continue.
+            </p>
+          </div>
+
+          <div>
+            <div class="login__inputs">
+              <div class="One-section">
+                <div class="one-section-child">
+                    <label for="" class="login__label" style="width: 500px;">Username</label>
+                <input
+                  type="text"
+                  placeholder="Enter your username"
+                  name="username"
+                  required
+                  style="width: 500px;"
+                  class="login__input"
+                />
+                </div>
+                <div class="one-section-child">
+                <label for="" class="login__label" style="width: 500px;">Name Of Your Company</label>
+                <input
+                  type="text"
+                  placeholder="Registered one please"
+                  name="companyname"
+                  required
+                  style="width: 500px;"
+                  class="login__input"
+                />
+                </div>
+              </div>
+
+              <div class="One-section">
+                <div class="one-section-child">
+<label for="" class="login__label email" style="width: 500px;">Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  name="email"
+                  required
+                  style="width: 500px;"
+                  class="login__input"
+                />
+                </div>
+                  <div class="one-section-child">
+                <label for="companytype" class="login__label email" style="width: 500px;">Choose your type of company:</label>
+                <select name="companytype" id="companytype" class="login__input" style="width: 500px;" required>
+                  <option value="Food Industry">Food Industry</option>
+                  <option value="Automotive Industry">Automotive Industry</option>
+                  <option value="Telecommunication Industry">Telcommunication Industry</option>
+                  <option value="Clothing Industry">Clothing Industry</option>
+                  <option value="Metal and Ferrous Industry">Metal and Ferrous industry</option>
+                  <option value="Equipment Industry">Equipment Industry</option>
+                  <option value="Clay Industry">clay Industry</option>
+                  <option value="Plastic Industry">Plastic Industry</option>
+                  <option value="Wood Industry">Wood Industry</option>
+                  <option value="Paper Industry">Paper Industry</option>
+                  <option value="Fashion Industry">Fashion Industry</option>
+                  <option value="Glass Industry">Glass Industry</option>
+                  <option value="Petroleum Industry">Petroleum Industry</option>
+                  <option value="Leather Industry">Leather Industry</option>
+                  <option value="Rubber Manufacturing Industry">Rubber Manufacturing Industry</option>
+                  <option value="Computer Manufacturing Industry">Computer Manufacturing Industry</option>
+                  <option value="Electronic Appliances Manufacturing Industry">Electronic Appliances Manufacturing Industry</option>
+                  <option value="Beverages Industry">Beverages Industry</option>
+                  <option value="Mining Industry">Mining Industry</option>
+                </select>
+                </div>
+              </div>
+
+              <div class="one-section">
+                <div class="one-section-child">
+                    <label for="" class="login__label password" style="width: 500px;">Password</label>
+                <div class="login__box">
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                    style="width: 500px;"
+                    class="login__input"
+                    id="input-pass"
+                    name="password"
+                  />
+                  <i class="ri-eye-off-line login__eye" id="input-icon"></i>
+                </div>
+                </div>
+                 <div class="one-section-child">
+                    <label for="" class="login__label password" style="width: 500px;">Contact Number</label>
+                <div class="login__box">
+                  <input
+                    type="number"
+                    style="width: 500px;"
+                    placeholder="phone Number"
+                    required
+                    class="login__input"
+                    name="phonenumber"
+                  />
+                  <i class="ri-eye-off-line login__eye" id="input-icon"></i>
+                </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <input type="submit" placeholder="Login" class="login__button" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="login.js"></script>
+  </body>
+</html>
