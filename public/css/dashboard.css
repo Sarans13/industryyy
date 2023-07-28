@@ -802,7 +802,7 @@ next
 	}
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 1600px) {
 	.messages-section {
 		transform: translateX(100%);
 		position: absolute;
