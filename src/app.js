@@ -105,7 +105,7 @@ app.post('/login', async (req, res) => {
             if (matchingCompanies.length > 0) {
                 res.status(201).render("dashboard", { user: check, currentDate,count, matchingCompanies });
               }
-        }
+                    }
         else {
             res.send("incorrect password")
         }

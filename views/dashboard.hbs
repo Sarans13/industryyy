@@ -97,10 +97,12 @@
         </div>
       </div>
       <div class="project-boxes jsGridView">
+        {{#if matchingCompanies.length}}
+         {{#each matchingCompanies}}
         <div class="project-box-wrapper">
           <div class="project-box" style="background-color: #fee4cb;">
             <div class="project-box-header">
-              <span>hello</span>
+              <span>{{currentDate}}</span>
               <div class="more-wrapper">
                 {{!-- <button class="project-btn-more">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
@@ -110,18 +112,12 @@
                 </button> --}}
           </div>
         </div>
-         {{#if companies.length}}
-         {{#each companies}}
         <div class="project-box-content-header">
           <p class="box-content-header">{{ this.problem }}</p>
           <p class="box-content-subheader">Prototyping</p>
         </div>
-          {{else}}
-    <p>No companies found with the specified criteria.</p>
-     {{/each}}
-      {{/if}}
         <div class="box-progress-wrapper">
-          <p class="box-progress-header">hello</p>
+          <p class="box-progress-header">{{ this.description }}</p>
           {{!-- <div class="box-progress-bar">
             <span class="box-progress" style="width: 60%; background-color: #ff942e"></span>
           </div>
@@ -143,6 +139,10 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <p>No companies found with the specified criteria.</p>
+     {{/each}}
+      {{/if}}
       </div>
     </div>
   </div>
