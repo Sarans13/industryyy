@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 const { StartupCollection, InvestorCollection } = require("./mongodb");
 const { companiesData } = require("./data");
+const { topperformers } = require("./company")
 
 
 //use app from express
@@ -42,6 +43,15 @@ app.get("/Contact", (req, res) => {
 app.get("/signup", (req, res) => {
     res.render("signup");
 });
+app.post('/pay',(req,res)=>{
+    res.status(201).render("pay");
+})
+app.post('/debit',(req,res)=>{
+    res.status(201).render("debit");
+})
+app.get('/backtohome',(req,res)=>{
+    res.status(201).render("index");
+})
 
 
 
@@ -103,7 +113,6 @@ app.post('/login', async (req, res) => {
         console.log(check.username,check.password);
         if (check.password === req.body.password) {
           if(check.color === 'red'){
-            const companytype = check.companytype;
             const matchingCompanies = companiesData.filter((company) => company.type === check.companytype);
             const count = await collection.countDocuments({});
             if (matchingCompanies.length > 0) {
@@ -128,7 +137,10 @@ app.post('/login', async (req, res) => {
 //to book.hbs
     app.post('/book', (req, res) => {
         const companyType = req.body.companytype;
-        console.log(companyType);
-        res.render('book', { companyType });
+        const topcompanies = topperformers.filter((company) => company.type === companyType);
+        if (topcompanies.length > 0) {
+            res.status(201).render("book", {topcompanies });
+          }
     });    
+
 

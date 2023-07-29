@@ -2,12 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Page</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="cards.css">
 </head>
 <body>
-    <h1>Booking Page</h1>
-    <p>Welcome to the booking page for {{companyType}} companies!</p>
-    <!-- You can use the {{companyType}} variable to display specific content based on the company type -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="../css/problem.css">
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="heading">
+            <h1>Top performing Companies to <span class="tag" style="color: #ffca42;">help you</span> out</h1>
+        </div>
+        <section class="neon bd-container">
+            <div class="neon__container">
+                 {{#if topcompanies.length}}
+                 {{#each topcompanies}}
+                <div class="neon__card">
+                    <h1 class="neon__title" style="color: #ffca42;">{{this.problem}}</h1>
+                    <br>
+                    <p class="neon__description">{{this.description}}</p>
+                    <form action="/pay" method="POST">
+                      <input type="hidden" name="companytype" value="{{this.type}}">
+                      <input type="hidden" name="companyname" value="{{this.problem}}">
+                      <button type="submit" class="neon__button">book now</button>
+                    </form>
+                </div>
+                {{else}}
+    <p>No companies found with the specified criteria.</p>
+     {{/each}}
+      {{/if}}
+            </div>
+        </section>
+    </body>
+</html>
 </body>
 </html>
