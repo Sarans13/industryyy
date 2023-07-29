@@ -43,6 +43,8 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 });
 
+
+
 //handling post requests for mongodb
 app.post('/signup', async (req, res) => {
     const data = {
@@ -101,6 +103,7 @@ app.post('/login', async (req, res) => {
         console.log(check.username,check.password);
         if (check.password === req.body.password) {
           if(check.color === 'red'){
+            const companytype = check.companytype;
             const matchingCompanies = companiesData.filter((company) => company.type === check.companytype);
             const count = await collection.countDocuments({});
             if (matchingCompanies.length > 0) {
@@ -121,3 +124,11 @@ app.post('/login', async (req, res) => {
         res.send("wrong details")
     }
 })
+
+//to book.hbs
+    app.post('/book', (req, res) => {
+        const companyType = req.body.companytype;
+        console.log(companyType);
+        res.render('book', { companyType });
+    });    
+
