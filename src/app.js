@@ -100,12 +100,18 @@ app.post('/login', async (req, res) => {
         const check = await collection.findOne({ username: req.body.username })
         console.log(check.username,check.password);
         if (check.password === req.body.password) {
+          if(check.color === 'red'){
             const matchingCompanies = companiesData.filter((company) => company.type === check.companytype);
             const count = await collection.countDocuments({});
             if (matchingCompanies.length > 0) {
                 res.status(201).render("dashboard", { user: check, currentDate,count, matchingCompanies });
               }
-                    }
+            }
+            else{
+                const startupCollectionData = await StartupCollection.find({}).lean();
+                res.status(201).render("investordashboard", { user: check, startupCollectionData });
+            }
+          }
         else {
             res.send("incorrect password")
         }

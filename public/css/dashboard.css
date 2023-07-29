@@ -754,13 +754,29 @@ next
 	padding: 0;
 }
 
-.days-left {
+/* .days-left {
 	background-color: rgba(255, 255, 255, 0.6);
 	font-size: 12px;
 	border-radius: 20px;
 	flex-shrink: 0;
 	padding: 6px 16px;
 	font-weight: 700;
+} */
+
+.days-left button{
+	background-color: rgba(255, 255, 255, 0.6);
+	font-size: 12px;
+	border-color: rgba(255,255,255,0.6);
+	border-radius: 20px;
+	flex-shrink: 0;
+	padding: 6px 16px;
+	font-weight: 700;
+}
+
+.days-left button:hover{
+	background-color: rgba(239, 138, 138, 0.6);
+	color: white;
+	border-color: rgba(239, 138, 138, 0.6);
 }
 
 .mode-switch.active .moon {
