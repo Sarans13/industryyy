@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    background-color: #3C3E45;
 }
 
 :root {
@@ -51,6 +52,7 @@
     font-weight: 600;
     font-size: 32px;
     font-style: italic;
+    color: #E9E9E9;
 }
 
 .left_sidebar .menu_items .menu_item {
@@ -96,7 +98,9 @@
 .main_content .main_navbar .dark_mode_icon .bx-sun {
     display: none;
 }
-
+.bx{
+    color: #E9E9E9;
+}
 .main_content .left_right_sidebar_opener {
     font-size: 45px;
     cursor: pointer;
@@ -150,10 +154,14 @@
     align-items: center;
     margin: 4px 0;
 }
+.yellow{
+    color: #FFCA42;
+}
 
 .menu_item_name_and_filter .menu_item_name h2 {
     font-weight: 600;
     font-size: 24px;
+    color: #FFCA42;
 }
 
 .menu_item_name_and_filter .filter_and_sort {
@@ -220,10 +228,11 @@
     text-align: left;
     font-size: 14px;
     cursor: pointer;
+    color: #E9E9E9;
 }
 
 .table tr:nth-child(even) {
-    background: #f1f8f8;
+    /* background: #f1f8f8; */
 }
 
 .table tr:nth-child(4) {
@@ -696,6 +705,7 @@
     .notification_and_name {
         color: #000;
     }
+    
     .notification_and_name .bx-chevron-down {
         display: none;
     }
